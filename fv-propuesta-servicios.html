@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FV Media — Propuesta de Servicios</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro:    #0D0D0D;
+    --carbon:   #1A1A1A;
+    --grafito:  #2B2B2B;
+    --oro:      #C9A84C;
+    --oro-dark: #B07A30;
+    --crema:    #E8E0D0;
+    --hueso:    #F5F2EC;
+    --plata:    #888888;
+    --petroleo: #4A7C6F;
+    --pet-dark: #1A3D30;
+    --pos:      #2E6B4F;
+    --neg:      #9B3A3A;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--hueso);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,124,111,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--petroleo);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero-logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--hueso);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--oro);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--plata);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.4s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.5s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--oro);
+    color: var(--negro);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: var(--oro-dark); transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-block;
+    background: transparent;
+    color: var(--plata);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 4px;
+    border: 1px solid var(--grafito);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-ghost:hover { border-color: var(--plata); color: var(--hueso); transform: translateY(-2px); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 64px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grafito);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.8s forwards;
+  }
+
+  .scroll-hint::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--grafito);
+  }
+
+  /* ── SECTIONS ─────────────────────────────────────────── */
+  section {
+    padding: 100px 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--petroleo);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    color: var(--hueso);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--plata);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 56px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--grafito);
+    margin: 0 64px;
+    width: calc(100% - 128px);
+  }
+
+  /* ── PROBLEMA ─────────────────────────────────────────── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 0;
+  }
+
+  .problem-card {
+    background: var(--carbon);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .problem-card:first-child { border-radius: 12px 0 0 12px; }
+  .problem-card:last-child { border-radius: 0 12px 12px 0; }
+  .problem-card:hover { background: #1F1F1F; }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--grafito);
+    transition: background 0.3s;
+  }
+
+  .problem-card:hover::before { background: var(--oro); }
+
+  .problem-num {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--grafito);
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .problem-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--hueso);
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  .problem-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--plata);
+    line-height: 1.7;
+  }
+
+  /* ── SERVICIO ─────────────────────────────────────────── */
+  .service-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .service-left { position: sticky; top: 40px; }
+
+  .service-price-box {
+    background: var(--carbon);
+    border: 1px solid var(--grafito);
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-price-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--oro), var(--petroleo));
+  }
+
+  .price-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--plata);
+    margin-bottom: 8px;
+  }
+
+  .price-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--hueso);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .price-value span {
+    font-size: 32px;
+    color: var(--oro);
+    vertical-align: super;
+  }
+
+  .price-sub {
+    font-size: 12px;
+    color: var(--plata);
+    margin-bottom: 32px;
+  }
+
+  .price-meta {
+    display: flex;
+    gap: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--grafito);
+  }
+
+  .price-meta-item .meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grafito);
+    margin-bottom: 4px;
+  }
+
+  .price-meta-item .meta-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--hueso);
+  }
+
+  /* ── DELIVERABLES ─────────────────────────────────────── */
+  .deliverable-list { list-style: none; }
+
+  .deliverable-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--grafito);
+    align-items: flex-start;
+    transition: padding-left 0.2s;
+  }
+
+  .deliverable-item:last-child { border: none; }
+  .deliverable-item:hover { padding-left: 8px; }
+
+  .deliverable-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: var(--pet-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .deliverable-icon svg { width: 14px; height: 14px; }
+
+  .deliverable-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--hueso);
+    margin-bottom: 4px;
+  }
+
+  .deliverable-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--plata);
+    line-height: 1.6;
+  }
+
+  /* ── PROCESO ──────────────────────────────────────────── */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+  }
+
+  .process-step {
+    background: var(--carbon);
+    padding: 32px 24px;
+    position: relative;
+  }
+
+  .process-step:first-child { border-radius: 12px 0 0 12px; }
+  .process-step:last-child { border-radius: 0 12px 12px 0; }
+
+  .process-step::after {
+    content: '→';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grafito);
+    font-size: 18px;
+    z-index: 2;
+  }
+
+  .process-step:last-child::after { display: none; }
+
+  .process-day {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--oro);
+    margin-bottom: 12px;
+  }
+
+  .process-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--hueso);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .process-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--plata);
+    line-height: 1.6;
+  }
+
+  /* ── GARANTIA ─────────────────────────────────────────── */
+  .garantia-box {
+    background: var(--carbon);
+    border: 1px solid var(--grafito);
+    border-radius: 16px;
+    padding: 48px 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .garantia-box::before {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+  }
+
+  .garantia-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--hueso);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .garantia-title em { color: var(--oro); font-style: italic; }
+
+  .garantia-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--plata);
+    line-height: 1.8;
+  }
+
+  .garantia-items { list-style: none; }
+
+  .garantia-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--grafito);
+  }
+
+  .garantia-item:last-child { border: none; }
+
+  .garantia-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--pet-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .garantia-check::after {
+    content: '✓';
+    font-size: 11px;
+    color: var(--petroleo);
+    font-weight: 600;
+  }
+
+  .garantia-item-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--hueso);
+    line-height: 1.5;
+  }
+
+  /* ── FAQ ──────────────────────────────────────────────── */
+  .faq-list { list-style: none; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--grafito);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+    gap: 20px;
+  }
+
+  .faq-q-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--hueso);
+    line-height: 1.4;
+  }
+
+  .faq-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--grafito);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--plata);
+    font-size: 18px;
+    transition: all 0.3s;
+  }
+
+  .faq-item.open .faq-icon {
+    background: var(--oro);
+    border-color: var(--oro);
+    color: var(--negro);
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+
+  .faq-item.open .faq-answer { max-height: 200px; }
+
+  .faq-answer-inner {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--plata);
+    line-height: 1.8;
+    padding-bottom: 24px;
+    max-width: 640px;
+  }
+
+  /* ── CTA FINAL ────────────────────────────────────────── */
+  .cta-section {
+    padding: 100px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 65%);
+  }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    color: var(--hueso);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .cta-title em { color: var(--oro); font-style: italic; }
+
+  .cta-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--plata);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+    position: relative;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  /* ── FOOTER ───────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--grafito);
+    padding: 40px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-brand {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--plata);
+  }
+
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--grafito);
+  }
+
+  /* ── ANIMATIONS ───────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ───────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero, section, .cta-section, footer { padding-left: 28px; padding-right: 28px; }
+    .problem-grid { grid-template-columns: 1fr; gap: 2px; }
+    .problem-card:first-child { border-radius: 12px 12px 0 0; }
+    .problem-card:last-child { border-radius: 0 0 12px 12px; }
+    .service-wrapper { grid-template-columns: 1fr; }
+    .service-left { position: static; }
+    .process-grid { grid-template-columns: 1fr; }
+    .process-step { border-radius: 0 !important; }
+    .process-step:first-child { border-radius: 12px 12px 0 0 !important; }
+    .process-step:last-child { border-radius: 0 0 12px 12px !important; }
+    .process-step::after { display: none; }
+    .garantia-box { grid-template-columns: 1fr; padding: 32px 28px; }
+    .divider { margin: 0 28px; width: calc(100% - 56px); }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">FV Media · Felipe Vargas · Diseño de Marca</p>
+
+  <div class="hero-logo">
+    <svg width="52" height="52" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <rect width="160" height="160" rx="16" fill="#1A1A1A"/>
+      <text x="16" y="114" font-family="'Montserrat',sans-serif" font-size="90" font-weight="200" fill="#F5F2EC">F</text>
+      <text x="55" y="114" font-family="'Montserrat',sans-serif" font-size="52" font-weight="700" fill="#4A7C6F" textLength="68" lengthAdjust="spacingAndGlyphs">V</text>
+    </svg>
+  </div>
+
+  <h1 class="hero-title">Tu marca,<br>lista en <em>5 días.</em></h1>
+
+  <p class="hero-sub">Identidad visual completa para founders que necesitan proyectar autoridad desde el día uno. Sin procesos eternos. Sin decisiones interminables.</p>
+
+  <div class="hero-cta">
+    <a href="#servicio" class="btn-primary">Ver el paquete</a>
+    <a href="#proceso" class="btn-ghost">Cómo funciona</a>
+  </div>
+
+  <div class="scroll-hint">Desplaza para ver</div>
+</div>
+
+<div class="divider reveal"></div>
+
+<!-- PROBLEMA -->
+<section class="reveal">
+  <p class="section-eyebrow">El problema</p>
+  <h2 class="section-title">Lo que le pasa<br>a tu marca ahora</h2>
+  <p class="section-desc">La mayoría de founders construye un producto sólido y lo envuelve en una imagen que no está a la altura. El resultado: invisible, descartado, infravalorado.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <p class="problem-num">01</p>
+      <p class="problem-text">"Se ven mejor que nosotros y son peores."</p>
+      <p class="problem-sub">Tu competencia proyecta más confianza aunque su producto sea inferior. La imagen gana antes de que puedas demostrar lo que vales.</p>
+    </div>
+    <div class="problem-card">
+      <p class="problem-num">02</p>
+      <p class="problem-text">"Nadie nos toma en serio en la primera reunión."</p>
+      <p class="problem-sub">Los inversores y clientes enterprise toman decisiones en los primeros 90 segundos. Antes de que abras la boca, tu marca ya habló por ti.</p>
+    </div>
+    <div class="problem-card">
+      <p class="problem-num">03</p>
+      <p class="problem-text">"Hicimos algo rápido y ahora tenemos que rehacer todo."</p>
+      <p class="problem-sub">Un logo barato hoy cuesta el doble en 6 meses: rediseño, materiales nuevos, reimpresiones, pérdida de coherencia visual acumulada.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"></div>
+
+<!-- SERVICIO -->
+<section id="servicio" class="reveal">
+  <p class="section-eyebrow">El paquete</p>
+  <h2 class="section-title">Identidad visual<br>completa</h2>
+  <p class="section-desc">Un paquete único, todo incluido. Sin sorpresas, sin extras, sin procesos interminables.</p>
+
+  <div class="service-wrapper">
+
+    <div class="service-left">
+      <div class="service-price-box">
+        <p class="price-label">Inversión única</p>
+        <p class="price-value"><span>$</span>499</p>
+        <p class="price-sub">USD · pago único antes de iniciar</p>
+        <div class="price-meta">
+          <div class="price-meta-item">
+            <p class="meta-label">Entrega</p>
+            <p class="meta-value">5 días</p>
+          </div>
+          <div class="price-meta-item">
+            <p class="meta-label">Revisiones</p>
+            <p class="meta-value">2 rondas</p>
+          </div>
+          <div class="price-meta-item">
+            <p class="meta-label">Formato</p>
+            <p class="meta-value">SVG + PNG</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;">
+        <a href="#contacto" class="btn-primary" style="display:block; text-align:center; width:100%; padding:18px;">Quiero empezar</a>
+      </div>
+    </div>
+
+    <div class="service-right">
+      <ul class="deliverable-list">
+
+        <li class="deliverable-item">
+          <div class="deliverable-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C6F" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <p class="deliverable-name">Brief estratégico</p>
+            <p class="deliverable-desc">Sesión de 30 minutos para entender tu negocio, audiencia y competencia. Esto define todo lo que viene después.</p>
+          </div>
+        </li>
+
+        <li class="deliverable-item">
+          <div class="deliverable-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C6F" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <p class="deliverable-name">Sistema de logo completo</p>
+            <p class="deliverable-desc">Monograma, versión horizontal, versión vertical y wordmark. 4 variantes para todos los contextos digitales y físicos.</p>
+          </div>
+        </li>
+
+        <li class="deliverable-item">
+          <div class="deliverable-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C6F" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div>
+            <p class="deliverable-name">Paleta de color</p>
+            <p class="deliverable-desc">Color primario + 6 colores del sistema con justificación. Valores HEX, RGB y CMYK listos para usar en cualquier herramienta.</p>
+          </div>
+        </li>
+
+        <li class="deliverable-item">
+          <div class="deliverable-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C6F" stroke-width="2"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+          </div>
+          <div>
+            <p class="deliverable-name">Sistema tipográfico</p>
+            <p class="deliverable-desc">Tipografías display y cuerpo seleccionadas para tu marca, con jerarquía completa y fallbacks para Office.</p>
+          </div>
+        </li>
+
+        <li class="deliverable-item">
+          <div class="deliverable-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C6F" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div>
+            <p class="deliverable-name">Brand guideline en PDF</p>
+            <p class="deliverable-desc">Documento de uso correcto de la marca — todo lo que necesitas para aplicarla de forma consistente sin depender de mí.</p>
+          </div>
+        </li>
+
+        <li class="deliverable-item">
+          <div class="deliverable-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C6F" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/></svg>
+          </div>
+          <div>
+            <p class="deliverable-name">Assets listos para usar</p>
+            <p class="deliverable-desc">Todos los archivos en SVG + PNG en 6 escalas (16px a 512px). Variantes para fondo claro y oscuro. Organizados y listos.</p>
+          </div>
+        </li>
+
+        <li class="deliverable-item">
+          <div class="deliverable-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7C6F" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div>
+            <p class="deliverable-name">2 rondas de revisión</p>
+            <p class="deliverable-desc">Dos oportunidades para ajustar dirección, colores o tipografías. Feedback estructurado, sin iteraciones infinitas.</p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider reveal"></div>
+
+<!-- PROCESO -->
+<section id="proceso" class="reveal">
+  <p class="section-eyebrow">El proceso</p>
+  <h2 class="section-title">5 días,<br>sin vueltas</h2>
+  <p class="section-desc">Cada día tiene un entregable claro. Sabes exactamente dónde estamos y qué viene después.</p>
+
+  <div class="process-grid">
+    <div class="process-step">
+      <p class="process-day">Día 1</p>
+      <p class="process-name">Brief + Investigación</p>
+      <p class="process-desc">Sesión de 30 min. Entiendo tu negocio, audiencia y referentes. Defino la dirección estratégica.</p>
+    </div>
+    <div class="process-step">
+      <p class="process-day">Día 2</p>
+      <p class="process-name">Color + Tipografía</p>
+      <p class="process-desc">Paleta y sistema tipográfico. Primera propuesta con justificación de cada decisión.</p>
+    </div>
+    <div class="process-step">
+      <p class="process-day">Día 3</p>
+      <p class="process-name">Logo + Variantes</p>
+      <p class="process-desc">Monograma y las 4 variantes del sistema. Presentación con contexto de uso.</p>
+    </div>
+    <div class="process-step">
+      <p class="process-day">Día 4</p>
+      <p class="process-name">Revisión + Ajustes</p>
+      <p class="process-desc">Tu feedback, mis ajustes. Hasta 2 rondas para que quede exactamente como debe ser.</p>
+    </div>
+    <div class="process-step">
+      <p class="process-day">Día 5</p>
+      <p class="process-name">Entrega final</p>
+      <p class="process-desc">Todos los assets + brand guideline en PDF. Organizados, nombrados y listos para usar.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"></div>
+
+<!-- GARANTIA -->
+<section class="reveal">
+  <div class="garantia-box">
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:12px;">Mi garantía</p>
+      <h2 class="garantia-title">Si no te convence,<br><em>no pagas.</em></h2>
+      <p class="garantia-text">Si al ver la primera propuesta sientes que no va en la dirección correcta y decides no continuar, te devuelvo el 100% del pago. Sin preguntas, sin procesos.</p>
+    </div>
+    <div>
+      <ul class="garantia-items">
+        <li class="garantia-item">
+          <div class="garantia-check"></div>
+          <p class="garantia-item-text">Devolución completa si la primera propuesta no te convence</p>
+        </li>
+        <li class="garantia-item">
+          <div class="garantia-check"></div>
+          <p class="garantia-item-text">Entrega garantizada en 5 días hábiles o te descuento el 20%</p>
+        </li>
+        <li class="garantia-item">
+          <div class="garantia-check"></div>
+          <p class="garantia-item-text">Todos los archivos fuente incluidos — son 100% tuyos</p>
+        </li>
+        <li class="garantia-item">
+          <div class="garantia-check"></div>
+          <p class="garantia-item-text">Soporte por 15 días post-entrega para dudas de implementación</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"></div>
+
+<!-- FAQ -->
+<section class="reveal">
+  <p class="section-eyebrow">Preguntas frecuentes</p>
+  <h2 class="section-title">Lo que todos<br>quieren saber</h2>
+
+  <ul class="faq-list">
+    <li class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Qué necesito para empezar?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-inner">Solo necesito que me cuentes sobre tu negocio: a qué te dedicas, a quién le vendes y qué marcas o estilos te inspiran. Con eso arrancamos. No necesitas tener nada preparado de antemano.</p>
+      </div>
+    </li>
+    <li class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Puedo pedir cambios después de la entrega?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-inner">Las 2 rondas de revisión cubren cualquier ajuste durante el proceso. Después de la entrega final, cambios adicionales tienen un costo por hora. El soporte de 15 días es para dudas de implementación, no para rediseños.</p>
+      </div>
+    </li>
+    <li class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Qué formatos de pago aceptas?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-inner">Transferencia bancaria, PayPal o Stripe. El pago es 100% por adelantado antes de iniciar el proyecto. Esto garantiza mi disponibilidad completa para tu proyecto durante los 5 días.</p>
+      </div>
+    </li>
+    <li class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Puedo usar la marca en todo tipo de aplicaciones?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-inner">Sí. Al entregar el proyecto te transfiero todos los derechos de la identidad visual. Es 100% tuya para usarla en digital, impresión, redes, packaging, lo que necesites.</p>
+      </div>
+    </li>
+    <li class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Trabajas con startups en etapa muy temprana?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-inner">Es exactamente para lo que estoy diseñado. No necesitas tener todo resuelto — necesitas una base sólida desde la que construir. Cuanto antes tengas la identidad correcta, menos corriges después.</p>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-section reveal" id="contacto">
+  <h2 class="cta-title">¿Listo para que tu<br>marca <em>se vea</em> como lo que es?</h2>
+  <p class="cta-sub">5 días. $499 USD. Identidad visual completa lista para lanzar.</p>
+  <div class="cta-buttons">
+    <a href="mailto:felipe@fvmedia.co?subject=Quiero%20empezar%20mi%20identidad%20visual" class="btn-primary">Escribir a Felipe</a>
+    <a href="https://linkedin.com/in/felipevargas" class="btn-ghost" target="_blank">Ver LinkedIn</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">FV Media · Felipe Vargas · Diseño de Marca</span>
+  <span class="footer-tagline">"De invisible a inconfundible."</span>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
